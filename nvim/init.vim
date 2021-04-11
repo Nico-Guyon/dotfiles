@@ -1,0 +1,1 @@
+/Users/nico/Google Drive/configs/.nvimrc
