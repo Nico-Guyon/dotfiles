@@ -44,6 +44,13 @@ nnoremap <silent> <Leader>pv :NERDTreeFind<CR>
 " Telescope
 nnoremap <C-P> :Telescope find_files<CR>
 
+" Hop easymotion plugin replacement for neovim
+nnoremap <silent> sw :HopWord<CR>
+nnoremap <silent> sj :HopLine<CR>
+nnoremap <silent> sf :HopChar1<CR>
+nnoremap <silent> s/ :HopPattern<CR>
+
+
 " completion settings
 set completeopt=menuone,noinsert,noselect
 set hidden
@@ -125,7 +132,8 @@ call plug#begin('~/.vim/plugged')
     if exists('g:vscode')
         Plug 'Nico-Guyon/vim-vscode-easymotion'
     else
-        Plug 'easymotion/vim-easymotion'
+        " Plug 'easymotion/vim-easymotion'
+        Plug 'phaazon/hop.nvim'
     endif
 
 
@@ -277,6 +285,13 @@ EOF
 
 " nvim-colorizer initialization
 lua require'colorizer'.setup()
+
+" temporary disable lsp while easyMotion is enalbed / not working 
+autocmd User EasyMotionPromptBegin call lsp#disable()<CR>
+autocmd User EasyMotionPromptEnd call lsp#enable()<CR>
+
+
+
 
 
 
