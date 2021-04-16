@@ -20,6 +20,14 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+" mapping for quickly moving lines
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
+
 map <D-F> /
 
 set scrolloff=8
@@ -63,8 +71,16 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 call plug#begin('~/.vim/plugged')
 
-
+    " Vim telescope
+    Plug 'nvim-lua/popup.nvim'
+    Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim'
+
+    " LSP and completion
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'hrsh7th/nvim-compe'
+    Plug 'hrsh7th/vim-vsnip'
+    Plug 'hrsh7th/vim-vsnip-integ'
 
     Plug 'sheerun/vim-polyglot'
 
@@ -96,6 +112,7 @@ call plug#begin('~/.vim/plugged')
    
     Plug 'nvim-treesitter/nvim-treesitter'
     Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+
 
 call plug#end()
 
@@ -207,5 +224,11 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
+" neovim-lsp configuration
+" https://rishabhrd.github.io/jekyll/update/2020/09/19/nvim_lsp_config.html
+" https://jose-elias-alvarez.medium.com/configuring-neovims-lsp-client-for-typescript-development-5789d58ea9c
+
+lua require("lsp-config")
+lua require("vsnip")
 
 
