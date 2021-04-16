@@ -28,6 +28,14 @@ inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
+" mapping for completion  menu navigation
+inoremap <expr> <C-j> pumvisible() ? "\<C-N>" : "\<C-j>"
+inoremap <expr> <C-k> pumvisible() ? "\<C-P>" : "\<C-k>"
+
+" completion settings
+set completeopt=menuone,noinsert,noselect
+set hidden
+
 map <D-F> /
 
 set scrolloff=8
