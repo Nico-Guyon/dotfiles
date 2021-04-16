@@ -99,7 +99,7 @@ local linters = {
 }
 
 local formatters = {
-    prettier = {command = "prettier", args = {"--stdin-filepath", "%filepath"}}
+    prettier = {command = "eslint_d", args = {"--fix-to-stdout", "--stdin", "--stdin-filename", "%filepath"}}
 }
 
 local formatFiletypes = {

@@ -50,6 +50,9 @@ nnoremap <silent> sj :HopLine<CR>
 nnoremap <silent> sf :HopChar1<CR>
 nnoremap <silent> s/ :HopPattern<CR>
 
+" vim-fugitive
+nnoremap <silent> <C-g> :Gdiff<CR>
+
 
 " completion settings
 set completeopt=menuone,noinsert,noselect
@@ -289,9 +292,4 @@ lua require'colorizer'.setup()
 " temporary disable lsp while easyMotion is enalbed / not working 
 autocmd User EasyMotionPromptBegin call lsp#disable()<CR>
 autocmd User EasyMotionPromptEnd call lsp#enable()<CR>
-
-
-
-
-
 
