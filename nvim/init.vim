@@ -7,6 +7,10 @@ set nocompatible
 filetype plugin on
 syntax on
 
+
+" set leader to space
+:let mapleader = "\<Space>"
+
 nmap <Enter> o<ESC>
 nmap <S-Enter> O<ESC>
 imap jj <Esc>
@@ -31,6 +35,14 @@ vnoremap <A-k> :m '<-2<CR>gv=gv
 " mapping for completion  menu navigation
 inoremap <expr> <C-j> pumvisible() ? "\<C-N>" : "\<C-j>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-P>" : "\<C-k>"
+
+
+" NERDTree mappings
+nnoremap <silent> <Leader>pt :NERDTreeToggle<CR>
+nnoremap <silent> <Leader>pv :NERDTreeFind<CR>
+
+" Telescope
+nnoremap <C-P> :Telescope find_files<CR>
 
 " completion settings
 set completeopt=menuone,noinsert,noselect
@@ -92,7 +104,9 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'sheerun/vim-polyglot'
 
-    Plug 'kien/ctrlp.vim'
+    Plug 'norcalli/nvim-colorizer.lua'
+
+    " Plug 'kien/ctrlp.vim'
     Plug 'rakr/vim-one'
     Plug 'gosukiwi/vim-atom-dark'
     " Plug 'morhetz/gruvbox'
@@ -124,6 +138,10 @@ call plug#begin('~/.vim/plugged')
 
 call plug#end()
 
+
+
+
+
 let g:gruvbox_contrast_dark = "hard"
 " highlight Normal ctermbg=u
 " colorscheme one
@@ -138,7 +156,9 @@ let NERDTreeShowLineNumbers=1
 " make sure relative line numbers are used
 autocmd FileType nerdtree setlocal relativenumber
 
-:let mapleader = "\<Space>"
+
+
+
 map <Leader> <Plug>(easymotion-prefix)
 
 
@@ -163,6 +183,10 @@ if exists('g:vscode')
 endif
 
 
+
+
+
+
 let g:firenvim_config = { 
     \ 'globalSettings': {
         \ 'alt': 'all',
@@ -179,6 +203,10 @@ let g:firenvim_config = {
 
 let fc = g:firenvim_config['localSettings']
 let fc['https?://[^/]+\.co\.uk/'] = { 'takeover': 'never', 'priority': 1 }
+
+
+
+
 
 "vimwiki config
 let g:vimwiki_map_prefix = '<Leader>x'
@@ -238,5 +266,17 @@ EOF
 
 lua require("lsp-config")
 lua require("vsnip")
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true
+  },
+}
+EOF
+
+" nvim-colorizer initialization
+lua require'colorizer'.setup()
+
 
 

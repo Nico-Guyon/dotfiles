@@ -25,6 +25,7 @@ _G.lsp_organize_imports = function()
     vim.lsp.buf.execute_command(params)
 end
 
+-- https://rishabhrd.github.io/jekyll/update/2020/09/19/nvim_lsp_config.html
 local on_attach = function(client, bufnr)
     local buf_map = vim.api.nvim_buf_set_keymap
     vim.cmd("command! LspDef lua vim.lsp.buf.definition()")
@@ -46,7 +47,7 @@ buf_map(bufnr, "n", "gd", ":LspDef<CR>", {silent = true})
     buf_map(bufnr, "n", "gr", ":LspRename<CR>", {silent = true})
     buf_map(bufnr, "n", "gR", ":LspRefs<CR>", {silent = true})
     buf_map(bufnr, "n", "gy", ":LspTypeDef<CR>", {silent = true})
-    buf_map(bufnr, "n", "K", ":LspHover<CR>", {silent = true})
+    buf_map(bufnr, "n", "gh", ":LspHover<CR>", {silent = true})
     buf_map(bufnr, "n", "gs", ":LspOrganize<CR>", {silent = true})
     buf_map(bufnr, "n", "[a", ":LspDiagPrev<CR>", {silent = true})
     buf_map(bufnr, "n", "]a", ":LspDiagNext<CR>", {silent = true})
