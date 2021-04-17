@@ -50,3 +50,4 @@ set PATH /opt/homebrew/bin $PATH
 alias braw="/opt/homebrew/bin/brew"
 alias brow="arch -x86_64 /usr/local/Homebrew/bin/brew"
 alias cat="nvimpager"
+alias diff="v -d"
