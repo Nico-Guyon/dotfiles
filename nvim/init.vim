@@ -105,6 +105,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim'
+    Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
     " LSP and completion
     Plug 'neovim/nvim-lspconfig'
@@ -112,26 +113,44 @@ call plug#begin('~/.vim/plugged')
     Plug 'hrsh7th/vim-vsnip'
     Plug 'hrsh7th/vim-vsnip-integ'
 
-    Plug 'sheerun/vim-polyglot'
+    " Git
+    Plug 'tpope/vim-fugitive' 
+    Plug 'Xuyuanp/nerdtree-git-plugin'
 
+    " NerdTree
+    Plug 'preservim/nerdtree'
+    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+    Plug 'ryanoasis/vim-devicons'
+
+    " syntax highligh
+    " disabled because now using treesitter for highlighting
+    " Plug 'sheerun/vim-polyglot'
+
+    " hex color code colorizer
     Plug 'norcalli/nvim-colorizer.lua'
 
-    " Plug 'kien/ctrlp.vim'
-    Plug 'rakr/vim-one'
-    Plug 'gosukiwi/vim-atom-dark'
+    " colorscheme plugins
+    " Plug 'rakr/vim-one'
+    " Plug 'gosukiwi/vim-atom-dark'
     " Plug 'morhetz/gruvbox'
+    " Plug 'joshdick/onedark.vim'
     Plug 'gruvbox-community/gruvbox'
-    Plug 'joshdick/onedark.vim'
-    Plug 'preservim/nerdtree'
+
+    " text manipulation plugins
     Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-abolish'
+    Plug 'jiangmiao/auto-pairs'
+
+    " airline
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
-    Plug 'tpope/vim-surround'
-    Plug 'tpope/vim-fugitive' 
-    " Plug 'puremourning/vimspector'
-    Plug 'tpope/vim-abolish'
-    Plug 'vimwiki/vimwiki'
 
+    " miscs wiki + web browser integration
+    Plug 'vimwiki/vimwiki'
+    Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+
+    " easyMotion / hop for fast movement
     if exists('g:vscode')
         Plug 'Nico-Guyon/vim-vscode-easymotion'
     else
@@ -139,10 +158,7 @@ call plug#begin('~/.vim/plugged')
         Plug 'phaazon/hop.nvim'
     endif
 
-
-    Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
-
-   
+    " treesitter 
     Plug 'nvim-treesitter/nvim-treesitter'
     Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
@@ -244,6 +260,37 @@ if (empty($TMUX))
 endif
 
 
+" telescope configuration => using fzy-native
+lua << EOF
+local actions = require('telescope.actions')
+require('telescope').setup {
+    defaults = {
+        file_ignore_patterns = {'node_modules'},
+        file_sorter = require('telescope.sorters').get_fzy_sorter,
+        prompt_prefix = ' >',
+        color_devicons = true,
+
+        file_previewer = require('telescope.previewers').vim_buffer_cat.new,
+        grep_previewer = require('telescope.previewers').vim_buffer_vimgrep.new,
+        qlist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
+
+        mapping = {
+            i = {
+                ["<C-x>"] = false,
+                ["<C-q>"] = actions.send_to_qflist,
+            },
+        }
+    },
+    extensions = {
+        fzy_native = {
+            override_generic_sorter = false,
+            override_file_sorter = true,
+        }
+    }
+}
+require('telescope').load_extension('fzy_native')
+
+EOF
 
 
 lua <<EOF
