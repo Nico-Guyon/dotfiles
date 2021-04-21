@@ -42,7 +42,14 @@ nnoremap <silent> <Leader>pt :NERDTreeToggle<CR>
 nnoremap <silent> <Leader>pv :NERDTreeFind<CR>
 
 " Telescope
-nnoremap <C-P> :Telescope find_files<CR>
+" nnoremap <C-P> :Telescope find_files<CR>
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+" Colorizer toggle mapping
+nnoremap <leader>ct <cmd>ColorizerToggle<cr>
 
 " Hop easymotion plugin replacement for neovim
 nnoremap <silent> sw :HopWord<CR>
@@ -261,6 +268,7 @@ endif
 
 
 " telescope configuration => using fzy-native
+" https://github.com/elianiva/dotfiles/blob/master/nvim/.config/nvim/lua/plugins/_telescope.lua#L58-L63
 lua << EOF
 local actions = require('telescope.actions')
 require('telescope').setup {
@@ -278,7 +286,13 @@ require('telescope').setup {
             i = {
                 ["<C-x>"] = false,
                 ["<C-q>"] = actions.send_to_qflist,
+                ["<C-u>"] = actions.preview_scrolling_up,
+                ["<C-d>"] = actions.preview_scrolling_down,
             },
+            n = {
+                ["<C-u>"] = actions.preview_scrolling_up,
+                ["<C-d>"] = actions.preview_scrolling_down,
+            }
         }
     },
     extensions = {
@@ -334,9 +348,13 @@ require'nvim-treesitter.configs'.setup {
 EOF
 
 " nvim-colorizer initialization
-lua require'colorizer'.setup()
+" lua require'colorizer'.setup()
 
 " temporary disable lsp while easyMotion is enalbed / not working 
 autocmd User EasyMotionPromptBegin call lsp#disable()<CR>
 autocmd User EasyMotionPromptEnd call lsp#enable()<CR>
 
+" fix nerdTree lag caused by vim-nerdtree-syntax-highlight
+" https://github.com/tiagofumo/vim-nerdtree-syntax-highlight/issues/17
+let NERDTreeHighlightCursorline = 0
+set lazyredraw
