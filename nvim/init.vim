@@ -52,10 +52,10 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>ct <cmd>ColorizerToggle<cr>
 
 " Hop easymotion plugin replacement for neovim
-nnoremap <silent> sw :HopWord<CR>
-nnoremap <silent> sj :HopLine<CR>
-nnoremap <silent> sf :HopChar1<CR>
-nnoremap <silent> s/ :HopPattern<CR>
+nnoremap <silent> <leader>w :HopWord<CR>
+nnoremap <silent> <leader>j :HopLine<CR>
+nnoremap <silent> <leader>f :HopChar1<CR>
+nnoremap <silent> <leader>/ :HopPattern<CR>
 
 " vim-fugitive
 nnoremap <silent> <C-g> :Gdiff<CR>
