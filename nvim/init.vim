@@ -358,3 +358,6 @@ autocmd User EasyMotionPromptEnd call lsp#enable()<CR>
 " https://github.com/tiagofumo/vim-nerdtree-syntax-highlight/issues/17
 let NERDTreeHighlightCursorline = 0
 set lazyredraw
+
+" enable airline tabline
+let g:airline#extensions#tabline#enabled = 1
