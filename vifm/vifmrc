@@ -233,8 +233,21 @@ fileviewer {*.[1-8]},<text/troff> man ./%c | col -b
 " Image
 filetype {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>
        \ open -a Preview.app,
-fileviewer {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>
-         \ identify %f
+" fileviewer {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>
+"          \ identify %f
+
+" fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
+"\ kitty +icat --place %pwx%ph@%pxx%py  --silent %c
+"\ %pc
+"\ kitty icat --clear --silent %pd
+
+ fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.xpm
+     \ kitty +kitten icat --transfer-mode=file --place=%pwx%ph@%pxx%py %c
+     \ %pc
+     \ kitty +kitten icat --transfer-mode=file --place=%pwx%ph@%pxx%py --clear
+
+" fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.xpm
+"     \ kitty +kitten icat --clear --place=%pwx%ph@%pxx%py  %c
 
 " MD5
 filetype *.md5
