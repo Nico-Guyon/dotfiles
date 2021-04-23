@@ -60,6 +60,9 @@ nnoremap <silent> <leader>/ :HopPattern<CR>
 " vim-fugitive
 nnoremap <silent> <C-g> :Gdiff<CR>
 
+" projectionist
+nnoremap <Leader>gt :A<CR>
+
 
 " completion settings
 set completeopt=menuone,noinsert,noselect
@@ -177,6 +180,9 @@ call plug#begin('~/.vim/plugged')
 
     " graphql
     Plug 'jparise/vim-graphql'
+
+    " projectionist
+    Plug 'tpope/vim-projectionist'
 
 call plug#end()
 
