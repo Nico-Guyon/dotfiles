@@ -141,7 +141,10 @@ call plug#begin('~/.vim/plugged')
     " Plug 'gosukiwi/vim-atom-dark'
     " Plug 'morhetz/gruvbox'
     " Plug 'joshdick/onedark.vim'
+    " Plug 'ghifarit53/tokyonight-vim'
+    " Plug 'folke/tokyonight.nvim'
     Plug 'gruvbox-community/gruvbox'
+
 
     " text manipulation plugins
     Plug 'tpope/vim-commentary'
@@ -175,14 +178,19 @@ call plug#end()
 
 
 
+set background=dark
 
-let g:gruvbox_contrast_dark = "hard"
+let g:gruvbox_bold = 1
+let g:gruvbox_italic = 1
+let g:gruvbox_contrast_dark = "dark"
+" let g:gruvbox_improved_warnings = 1
+" let g:gruvbox_improved_strings = 1
+
 " highlight Normal ctermbg=u
 " colorscheme one
 colorscheme gruvbox
 " colorscheme onedark
 
-set background=dark
 highlight Normal ctermbg=NONE guibg=NONE
 
 " enable line numbers
@@ -361,3 +369,7 @@ set lazyredraw
 
 " enable airline tabline
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+
+set termguicolors
+
