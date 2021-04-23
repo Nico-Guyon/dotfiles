@@ -56,11 +56,12 @@ buf_map(bufnr, "n", "gd", ":LspDef<CR>", {silent = true})
     buf_map(bufnr, "i", "<C-x><C-x>", "<cmd> LspSignatureHelp<CR>",
               {silent = true})
 
+
 if client.resolved_capabilities.document_formatting then
         vim.api.nvim_exec([[
          augroup LspAutocommands
              autocmd! * <buffer>
-             autocmd BufWritePost <buffer> LspFormatting
+             autocmd BufWritePre <buffer> LspFormatting
          augroup END
          ]], true)
     end

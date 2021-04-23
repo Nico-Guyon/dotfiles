@@ -103,6 +103,9 @@ set undofile
 " apparently having longer update time leads to poor user experience
 set updatetime=50 
 
+set timeoutlen=1000
+set ttimeoutlen=5
+
 
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
@@ -131,7 +134,7 @@ call plug#begin('~/.vim/plugged')
 
     " syntax highligh
     " disabled because now using treesitter for highlighting
-    " Plug 'sheerun/vim-polyglot'
+    Plug 'sheerun/vim-polyglot'
 
     " hex color code colorizer
     Plug 'norcalli/nvim-colorizer.lua'
@@ -172,6 +175,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'nvim-treesitter/nvim-treesitter'
     Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
+    " graphql
+    Plug 'jparise/vim-graphql'
 
 call plug#end()
 
@@ -373,3 +378,5 @@ let g:airline_powerline_fonts = 1
 
 set termguicolors
 
+"vim surround customization
+let g:surround_{char2nr("d")} = "\n{/* \r */}\n"
