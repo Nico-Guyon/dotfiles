@@ -157,6 +157,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-abolish'
     Plug 'jiangmiao/auto-pairs'
+    Plug 'neoclide/vim-jsx-improve'
 
     " airline
     Plug 'vim-airline/vim-airline'

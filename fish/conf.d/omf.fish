@@ -10,11 +10,24 @@ source $OMF_PATH/init.fish
 set -g theme_color_scheme gruvbox
 
 # personal custom aliases
-alias hp3="cd ~/Desktop/HP3"
+#  paths
+alias mhp="cd ~/work/HT"
+alias mclub="cd ~/work/clubvtc"
+alias mdot="cs ~/.config"
+alias mvi="cd ~/.config/nvim"
+alias mfish="cd ~/.config/fish/conf.d"
+#  vim
 alias v="nvim"
 alias vim="nvim"
 alias vi="nvim"
 alias oldvim="vim"
+#  ls
+alias lla="ls -alh"
+#  git
+alias gd="git diff"
+alias gs="git status"
+alias gc="git commit -a"
+alias gb="git branch"
 
 # fish vim mode
 fish_vi_key_bindings
@@ -52,4 +65,4 @@ alias brow="arch -x86_64 /usr/local/Homebrew/bin/brew"
 alias cat="nvimpager"
 alias diff="v -d"
 alias sim="/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/Contents/MacOS/Simulator"
-alias lla="ls -alh"
+
