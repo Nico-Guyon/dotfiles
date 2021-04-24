@@ -32,6 +32,7 @@ alias gb="git branch"
 # fish vim mode
 fish_vi_key_bindings
 fish_vi_cursor
+set fish_key_bindings fish_user_key_bindings
 
 # UTF-8 support
 export LC_ALL=en_US.UTF-8
