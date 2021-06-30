@@ -11,8 +11,8 @@ syntax on
 " set leader to space
 :let mapleader = "\<Space>"
 
-nmap <Enter> o<ESC>
-nmap <S-Enter> O<ESC>
+" nmap <Enter> o<ESC>
+" nmap <S-Enter> O<ESC>
 imap jj <Esc>
 imap kj <Esc>
 imap jk <Esc>
@@ -24,17 +24,26 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+tnoremap <C-J> <C-\><C-n><C-W><C-J>
+tnoremap <C-K> <C-\><C-n><C-W><C-K>
+tnoremap <C-L> <C-\><C-n><C-W><C-L>
+tnoremap <C-H> <C-\><C-n><C-W><C-H>
+
 " mapping for quickly moving lines
-nnoremap <A-j> :m .+1<CR>==
-nnoremap <A-k> :m .-2<CR>==
-inoremap <A-j> <Esc>:m .+1<CR>==gi
-inoremap <A-k> <Esc>:m .-2<CR>==gi
-vnoremap <A-j> :m '>+1<CR>gv=gv
-vnoremap <A-k> :m '<-2<CR>gv=gv
+" <A-j> is character ∆
+" <A-k> is character ˚
+nnoremap ∆ :m .+1<CR>==
+nnoremap ˚ :m .-2<CR>==
+inoremap ∆ <Esc>:m .+1<CR>==gi
+inoremap ˚ <Esc>:m .-2<CR>==gi
+vnoremap ∆ :m '>+1<CR>gv=gv
+vnoremap ˚ :m '<-2<CR>gv=gv
 
 " mapping for completion  menu navigation
 inoremap <expr> <C-j> pumvisible() ? "\<C-N>" : "\<C-j>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-P>" : "\<C-k>"
+inoremap <silent><expr> <C-Space> compe#complete()
+inoremap <silent><expr> <CR>      compe#confirm('<CR>')
 
 
 " NERDTree mappings
@@ -158,10 +167,11 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-abolish'
     Plug 'jiangmiao/auto-pairs'
     Plug 'neoclide/vim-jsx-improve'
+    Plug 'alvan/vim-closetag'
 
     " airline
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
+    " Plug 'vim-airline/vim-airline'
+    " Plug 'vim-airline/vim-airline-themes'
 
     " miscs wiki + web browser integration
     Plug 'vimwiki/vimwiki'
@@ -178,6 +188,7 @@ call plug#begin('~/.vim/plugged')
     " treesitter 
     Plug 'nvim-treesitter/nvim-treesitter'
     Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+    Plug 'nvim-treesitter/playground'
 
     " graphql
     Plug 'jparise/vim-graphql'
@@ -293,7 +304,7 @@ lua << EOF
 local actions = require('telescope.actions')
 require('telescope').setup {
     defaults = {
-        file_ignore_patterns = {'node_modules'},
+        file_ignore_patterns = {'node_modules', '%.png', '%.ttf', '%.jpg'},
         file_sorter = require('telescope.sorters').get_fzy_sorter,
         prompt_prefix = ' >',
         color_devicons = true,
@@ -338,6 +349,10 @@ require'nvim-treesitter.configs'.setup {
         ["if"] = "@function.inner",
         ["ac"] = "@class.outer",
         ["ic"] = "@class.inner",
+        ["ab"] = "@block.outer",
+        ["ib"] = "@block.inner",
+        ["al"] = "@lexical.outer",
+
 
         -- Or you can define your own textobjects like this
         ["iF"] = {
@@ -387,3 +402,65 @@ set termguicolors
 
 "vim surround customization
 let g:surround_{char2nr("d")} = "\n{/* \r */}\n"
+
+
+" https://github.com/vim-airline/vim-airline/issues/421
+let g:airline_extensions = []
+
+" close tags
+
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.tsx'
+" let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.tsx'
+let g:closetag_regions =  {
+\ 'typescript.tsx': 'jsxRegion,tsxRegion',
+\ 'javascript.jsx': 'jsxRegion',
+\ }"
+
+
+lua <<EOF
+require'hop'.setup{}
+EOF
+
+
+""" filenames like *.xml, *.html, *.xhtml, ...
+"" These are the file extensions where this plugin is enabled.
+""
+"let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
+
+"" filenames like *.xml, *.xhtml, ...
+"" This will make the list of non-closing tags self-closing in the specified files.
+""
+"let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.tsx'
+
+"" filetypes like xml, html, xhtml, ...
+"" These are the file types where this plugin is enabled.
+""
+"let g:closetag_filetypes = 'html,xhtml,phtml'
+
+"" filetypes like xml, xhtml, ...
+"" This will make the list of non-closing tags self-closing in the specified files.
+""
+"let g:closetag_xhtml_filetypes = 'xhtml,jsx,tsx'
+
+"" integer value [0|1]
+"" This will make the list of non-closing tags case-sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
+""
+"let g:closetag_emptyTags_caseSensitive = 1
+
+"" dict
+"" Disables auto-close if not in a "valid" region (based on filetype)
+""
+"" let g:closetag_regions = {
+""     \ 'typescript.tsx': 'jsxRegion,tsxRegion',
+""     \ 'javascript.jsx': 'jsxRegion',
+""     \ 'typescriptreact': 'jsxRegion,tsxRegion',
+""     \ 'javascriptreact': 'jsxRegion',
+""     \ }
+
+"" Shortcut for closing tags, default is '>'
+""
+"let g:closetag_shortcut = '>'
+
+"" Add > at current position without closing the current tag, default is ''
+""
+"let g:closetag_close_shortcut = '<leader>>'
