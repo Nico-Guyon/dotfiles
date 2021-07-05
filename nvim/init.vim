@@ -66,6 +66,11 @@ nnoremap <silent> <leader>j :HopLine<CR>
 nnoremap <silent> <leader>f :HopChar1<CR>
 nnoremap <silent> <leader>/ :HopPattern<CR>
 
+
+" fugitive + quicfix list
+nnoremap <silent> <space>gg :0Gclog<CR>
+nnoremap <silent> <space>cc :cclose<CR>
+
 " vim-fugitive
 nnoremap <silent> <C-g> :Gdiff<CR>
 
@@ -196,7 +201,14 @@ call plug#begin('~/.vim/plugged')
     " projectionist
     Plug 'tpope/vim-projectionist'
 
+    " matching commands
+    Plug 'tpope/vim-unimpaired'
+    
+    " better matchit plugin for % key
+    Plug 'andymass/vim-matchup'
+
 call plug#end()
+
 
 
 
@@ -340,6 +352,9 @@ EOF
 
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
+  matchup = {
+    enable = true,
+  },
   textobjects = {
     select = {
       enable = true,
