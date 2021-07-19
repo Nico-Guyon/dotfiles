@@ -61,9 +61,12 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>ct <cmd>ColorizerToggle<cr>
 
 " Hop easymotion plugin replacement for neovim
-nnoremap <silent> <leader>w :HopWord<CR>
-nnoremap <silent> <leader>j :HopLine<CR>
-nnoremap <silent> <leader>f :HopChar1<CR>
+nnoremap <silent> <leader>w :HopWordAC<CR>
+nnoremap <silent> <leader>b :HopWordBC<CR>
+nnoremap <silent> <leader>j :HopLineAC<CR>
+nnoremap <silent> <leader>k :HopLineBC<CR>
+nnoremap <silent> <leader>f :HopChar1AC<CR>
+nnoremap <silent> <leader>F :HopChar1BC<CR>
 nnoremap <silent> <leader>/ :HopPattern<CR>
 
 
@@ -133,12 +136,14 @@ call plug#begin('~/.vim/plugged')
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim'
     Plug 'nvim-telescope/telescope-fzy-native.nvim'
+    Plug 'kyazdani42/nvim-web-devicons'
 
     " LSP and completion
     Plug 'neovim/nvim-lspconfig'
     Plug 'hrsh7th/nvim-compe'
     Plug 'hrsh7th/vim-vsnip'
     Plug 'hrsh7th/vim-vsnip-integ'
+    Plug 'glepnir/lspsaga.nvim'
 
     " Git
     Plug 'tpope/vim-fugitive' 
@@ -217,7 +222,7 @@ set background=dark
 
 let g:gruvbox_bold = 1
 let g:gruvbox_italic = 1
-let g:gruvbox_contrast_dark = "dark"
+let g:gruvbox_contrast_dark = "hard"
 " let g:gruvbox_improved_warnings = 1
 " let g:gruvbox_improved_strings = 1
 
@@ -258,8 +263,6 @@ if exists('g:vscode')
     nnoremap <C-W>o <Cmd>call VSCodeNotify('workbench.action.closeEditorsInOtherGroups')<CR>
 
 endif
-
-
 
 
 
@@ -318,6 +321,16 @@ require('telescope').setup {
     defaults = {
         file_ignore_patterns = {'node_modules', '%.png', '%.ttf', '%.jpg'},
         file_sorter = require('telescope.sorters').get_fzy_sorter,
+         vimgrep_arguments = {
+             'rg',
+             '--color=never',
+             '--no-heading',
+             '--with-filename',
+             '--line-number',
+             '--column',
+             '--smart-case'
+         },
+
         prompt_prefix = ' >',
         color_devicons = true,
 
@@ -331,10 +344,14 @@ require('telescope').setup {
                 ["<C-q>"] = actions.send_to_qflist,
                 ["<C-u>"] = actions.preview_scrolling_up,
                 ["<C-d>"] = actions.preview_scrolling_down,
+                ["<C-j>"] = actions.move_selection_next,
+                ["<C-k>"] = actions.move_selection_previous,
             },
             n = {
                 ["<C-u>"] = actions.preview_scrolling_up,
                 ["<C-d>"] = actions.preview_scrolling_down,
+                ["<C-j>"] = actions.move_selection_next,
+                ["<C-k>"] = actions.move_selection_previous,
             }
         }
     },
@@ -350,6 +367,7 @@ require('telescope').load_extension('fzy_native')
 EOF
 
 
+" Treesitter
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
   matchup = {
@@ -479,3 +497,46 @@ EOF
 "" Add > at current position without closing the current tag, default is ''
 ""
 "let g:closetag_close_shortcut = '<leader>>'
+
+
+
+
+" lspsaga
+lua << EOF
+local saga = require 'lspsaga'
+saga.init_lsp_saga()
+
+EOF
+
+" async lsp finder
+nnoremap <silent>gR <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
+
+" code action
+nnoremap <silent>ga <cmd>lua require('lspsaga.codeaction').code_action()<CR>
+vnoremap <silent>ga :<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>
+
+" hover doc
+nnoremap <silent> gh <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
+nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
+nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
+
+" signature help
+nnoremap <silent>gs <cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>
+
+" rename 
+nnoremap <silent>gr <cmd>lua require('lspsaga.rename').rename()<CR>
+
+" Preview Definition
+nnoremap <silent>gD <cmd>lua require'lspsaga.provider'.preview_definition()<CR>
+
+" Jump Diagnostic and Show Diagnostics 
+nnoremap <silent><leader>a <cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>
+" nnoremap <silent><leader>cc <cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>
+nnoremap <silent> [e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>
+nnoremap <silent> ]e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>
+
+
+
+
+
+

@@ -21,13 +21,17 @@ alias v="nvim"
 alias vim="nvim"
 alias vi="nvim"
 alias oldvim="vim"
+alias vs="nvim -S Session.vim"
 #  ls
-alias lla="ls -alh"
+alias ll="exa -l -g --icons"
+alias lla="ll -alh"
 #  git
 alias gd="git diff"
 alias gs="git status"
 alias gc="git commit -a"
 alias gb="git branch"
+# miscs
+alias ssh="kitty +kitten ssh"
 
 # fish vim mode
 fish_vi_key_bindings
