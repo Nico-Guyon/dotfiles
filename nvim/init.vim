@@ -56,6 +56,9 @@ nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>fq <cmd>Telescope quickfix<cr>
+nnoremap <leader>fl <cmd>Telescope loclist<cr>
+
 
 " Colorizer toggle mapping
 nnoremap <leader>ct <cmd>ColorizerToggle<cr>
@@ -73,6 +76,7 @@ nnoremap <silent> <leader>/ :HopPattern<CR>
 " fugitive + quicfix list
 nnoremap <silent> <space>gg :0Gclog<CR>
 nnoremap <silent> <space>cc :cclose<CR>
+nnoremap <silent> <space>ll :lclose<CR>
 
 " vim-fugitive
 nnoremap <silent> <C-g> :Gdiff<CR>
@@ -199,6 +203,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'nvim-treesitter/nvim-treesitter'
     Plug 'nvim-treesitter/nvim-treesitter-textobjects'
     Plug 'nvim-treesitter/playground'
+    Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 
     " graphql
     Plug 'jparise/vim-graphql'
@@ -338,10 +343,11 @@ require('telescope').setup {
         grep_previewer = require('telescope.previewers').vim_buffer_vimgrep.new,
         qlist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
 
-        mapping = {
+        mappings = {
             i = {
                 ["<C-x>"] = false,
-                ["<C-q>"] = actions.send_to_qflist,
+                ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+                ["<C-l>"] = actions.send_to_loclist + actions.open_loclist,
                 ["<C-u>"] = actions.preview_scrolling_up,
                 ["<C-d>"] = actions.preview_scrolling_down,
                 ["<C-j>"] = actions.move_selection_next,
@@ -370,6 +376,9 @@ EOF
 " Treesitter
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
+  context_commentstring = {
+    enable = true
+  },
   matchup = {
     enable = true,
   },
