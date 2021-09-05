@@ -71,3 +71,5 @@ alias cat="nvimpager"
 alias diff="v -d"
 alias sim="/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/Contents/MacOS/Simulator"
 
+
+set -U FZF_ENABLE_OPEN_PREVIEW 1

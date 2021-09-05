@@ -17,6 +17,12 @@ imap jj <Esc>
 imap kj <Esc>
 imap jk <Esc>
 
+" remap file writing and quit typos
+ :command WQ wq
+ :command Wq wq
+ :command W w
+ :command Q q
+
 " map ctrl HJKL for movements between windows
 " faster than ctrl W then HJKL
 nnoremap <C-J> <C-W><C-J>
@@ -59,6 +65,8 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>fq <cmd>Telescope quickfix<cr>
 nnoremap <leader>fl <cmd>Telescope loclist<cr>
 
+nnoremap <C-s> :w<CR>
+inoremap <C-s> <ESC>:w<CR>i
 
 " Colorizer toggle mapping
 nnoremap <leader>ct <cmd>ColorizerToggle<cr>
@@ -75,14 +83,21 @@ nnoremap <silent> <leader>/ :HopPattern<CR>
 
 " fugitive + quicfix list
 nnoremap <silent> <space>gg :0Gclog<CR>
+
+" quickfix and location list
+nnoremap <silent> <space>co :copen<CR>
 nnoremap <silent> <space>cc :cclose<CR>
-nnoremap <silent> <space>ll :lclose<CR>
+nnoremap <silent> <space>lo :lopen<CR>
+nnoremap <silent> <space>lc :lclose<CR>
 
 " vim-fugitive
 nnoremap <silent> <C-g> :Gdiff<CR>
 
 " projectionist
 nnoremap <Leader>gt :A<CR>
+
+" reload nvim config
+nnoremap <leader>sv :source $MYVIMRC<CR>
 
 
 " completion settings
@@ -546,6 +561,6 @@ nnoremap <silent> ]e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_ne
 
 
 
-
+" lua vim.lsp.handlers["textDocument/publishDiagnostics"] = function() end
 
 
