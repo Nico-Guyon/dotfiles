@@ -57,11 +57,11 @@ local on_attach = function(client, bufnr)
               {silent = true})
 
 
-if client.resolved_capabilities.document_formatting then
+    if client.resolved_capabilities.document_formatting then
         vim.api.nvim_exec([[
          augroup LspAutocommands
              autocmd! * <buffer>
-             autocmd BufWritePre <buffer> LspFormatting
+             autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()  
          augroup END
          ]], true)
     end
@@ -77,6 +77,7 @@ nvim_lsp.tsserver.setup {
 local filetypes = {
     typescript = "eslint",
     typescriptreact = "eslint",
+    html = "eslint",
 }
 
 local linters = {
@@ -100,14 +101,17 @@ local linters = {
 }
 
 local formatters = {
-    prettier = {command = "eslint_d", args = {"--fix-to-stdout", "--stdin", "--stdin-filename", "%filepath"}}
+    prettier = {command = "eslint_d", args = {"--fix-to-stdout", "--stdin", "--stdin-filename", "%filepath"}},
+    prettierSimple = {command = "prettier", asrgs = {"--stdin-filepath", '%filepath'}}
 }
 
 local formatFiletypes = {
     typescript = "prettier",
-    typescriptreact = "prettier"
+    typescriptreact = "prettier",
+    html = "prettierSimple"
 }
 
+-- https://www.reddit.com/r/neovim/comments/j2tn38/help_with_integrate_nvimlsp_with_eslint/
 nvim_lsp.diagnosticls.setup {
     on_attach = on_attach,
     filetypes = vim.tbl_keys(filetypes),
