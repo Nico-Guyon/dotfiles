@@ -52,9 +52,9 @@ inoremap <silent><expr> <C-Space> compe#complete()
 inoremap <silent><expr> <CR>      compe#confirm('<CR>')
 
 
-" NERDTree mappings
-nnoremap <silent> <Leader>pt :NERDTreeToggle<CR>
-nnoremap <silent> <Leader>pv :NERDTreeFind<CR>
+" File tree mappings (using nvimTree for now)
+nnoremap <silent> <Leader>pt :NvimTreeToggle<CR>
+nnoremap <silent> <Leader>pv :NvimTreeFindFile<CR>
 
 " Telescope
 " nnoremap <C-P> :Telescope find_files<CR>
@@ -166,12 +166,9 @@ call plug#begin('~/.vim/plugged')
 
     " Git
     Plug 'tpope/vim-fugitive' 
-    Plug 'Xuyuanp/nerdtree-git-plugin'
 
-    " NerdTree
-    Plug 'preservim/nerdtree'
-    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-    Plug 'ryanoasis/vim-devicons'
+    " nvim-tree
+    Plug 'kyazdani42/nvim-tree.lua'
 
     " syntax highligh
     " disabled because now using treesitter for highlighting
@@ -194,7 +191,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-abolish'
-    Plug 'jiangmiao/auto-pairs'
+    Plug 'windwp/nvim-autopairs'
     Plug 'neoclide/vim-jsx-improve'
     Plug 'alvan/vim-closetag'
 
@@ -232,6 +229,9 @@ call plug#begin('~/.vim/plugged')
     " better matchit plugin for % key
     Plug 'andymass/vim-matchup'
 
+    " terminal
+    Plug 'norcalli/nvim-terminal.lua'
+
 call plug#end()
 
 
@@ -253,17 +253,8 @@ colorscheme gruvbox
 
 highlight Normal ctermbg=NONE guibg=NONE
 
-" enable line numbers
-let NERDTreeShowLineNumbers=1
-" make sure relative line numbers are used
-autocmd FileType nerdtree setlocal relativenumber
-
-
-
 
 map <Leader> <Plug>(easymotion-prefix)
-
-
 
 if exists('g:vscode')
     xmap gc  <Plug>VSCodeCommentary
@@ -430,6 +421,7 @@ EOF
 
 lua require("lsp-config")
 lua require("vsnip")
+lua require("lsp-html")
 
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
@@ -446,9 +438,6 @@ EOF
 autocmd User EasyMotionPromptBegin call lsp#disable()<CR>
 autocmd User EasyMotionPromptEnd call lsp#enable()<CR>
 
-" fix nerdTree lag caused by vim-nerdtree-syntax-highlight
-" https://github.com/tiagofumo/vim-nerdtree-syntax-highlight/issues/17
-let NERDTreeHighlightCursorline = 0
 set lazyredraw
 
 " enable airline tabline
@@ -564,3 +553,18 @@ nnoremap <silent> ]e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_ne
 " lua vim.lsp.handlers["textDocument/publishDiagnostics"] = function() end
 
 
+" nvim-autopairs
+lua << EOF
+require('nvim-autopairs').setup{}
+require("nvim-autopairs.completion.compe").setup({
+  map_cr = true, --  map <CR> on insert mode
+  map_complete = true, -- it will auto insert `(` after select function or method item
+  auto_select = false,  -- auto select first item
+})
+EOF
+
+
+" nvim-terminal.lua
+lua << EOF
+require'terminal'.setup()
+EOF
