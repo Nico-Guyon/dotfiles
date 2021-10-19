@@ -400,14 +400,6 @@ let g:closetag_regions =  {
 
 
 
-
-" lspsaga
-lua << EOF
-local saga = require 'lspsaga'
-saga.init_lsp_saga()
-
-EOF
-
 " async lsp finder
 nnoremap <silent>gR <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
 
