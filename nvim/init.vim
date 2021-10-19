@@ -330,7 +330,6 @@ EOF
 " neovim-lsp configuration
 " https://rishabhrd.github.io/jekyll/update/2020/09/19/nvim_lsp_config.html
 " https://jose-elias-alvarez.medium.com/configuring-neovims-lsp-client-for-typescript-development-5789d58ea9c
-
 set lazyredraw
 
 " enable airline tabline
@@ -354,11 +353,6 @@ let g:closetag_regions =  {
 \ 'typescript.tsx': 'jsxRegion,tsxRegion',
 \ 'javascript.jsx': 'jsxRegion',
 \ }"
-
-
-lua <<EOF
-require'hop'.setup{}
-EOF
 
 
 """ filenames like *.xml, *.html, *.xhtml, ...
