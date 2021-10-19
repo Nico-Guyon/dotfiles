@@ -124,9 +124,6 @@ call plug#begin('~/.vim/plugged')
 
 call plug#end()
 
-"vim surround customization
-let g:surround_{char2nr("d")} = "\n{/* \r */}\n"
-
 " set log
 "let g:lsp_log_verbose = 1
 "let g:lsp_log_file = expand('~/lsp.log')
