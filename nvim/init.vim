@@ -18,10 +18,10 @@ imap kj <Esc>
 imap jk <Esc>
 
 " remap file writing and quit typos
- :command WQ wq
- :command Wq wq
- :command W w
- :command Q q
+:command WQ wq
+:command Wq wq
+:command W w
+:command Q q
 
 " map ctrl HJKL for movements between windows
 " faster than ctrl W then HJKL
@@ -95,21 +95,17 @@ nnoremap <Leader>gt :A<CR>
 
 " reload nvim config
 nnoremap <leader>sv :source $MYVIMRC<CR>
+map <D-F> /
 
 
 " completion settings
 set completeopt=menu,menuone,noselect
 set hidden
-
-map <D-F> /
-
 set scrolloff=8
-
 
 " column configuration
 set signcolumn=yes
 set colorcolumn=80
-
 
 " line numbers
 set relativenumber
@@ -118,7 +114,6 @@ set number
 " search highlighting
 set nohlsearch " don't highligh searched terms
 set incsearch " highligh as searching
-
 
 set noerrorbells
 
@@ -138,12 +133,8 @@ set undofile
 
 " apparently having longer update time leads to poor user experience
 set updatetime=50 
-
 set timeoutlen=1000
 set ttimeoutlen=5
-
-
-highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 call plug#begin('~/.vim/plugged')
 
@@ -271,28 +262,11 @@ if (empty($TMUX))
   endif
 endif
 
-
-" neovim-lsp configuration
-" https://rishabhrd.github.io/jekyll/update/2020/09/19/nvim_lsp_config.html
-" https://jose-elias-alvarez.medium.com/configuring-neovims-lsp-client-for-typescript-development-5789d58ea9c
 set lazyredraw
-
-" enable airline tabline
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-
 set termguicolors
 
 "vim surround customization
 let g:surround_{char2nr("d")} = "\n{/* \r */}\n"
-
-
-" https://github.com/vim-airline/vim-airline/issues/421
-let g:airline_extensions = []
-
-
-
-
 
 
 " set log
