@@ -1,3 +1,5 @@
+set lazyredraw
+set termguicolors
 set background=dark
 
 " color theme settings

@@ -1,14 +1,10 @@
 set title
 set titlestring=\ %-25.55F\ %a%r%m titlelen=70
-
 set clipboard=unnamedplus
 
 set nocompatible
 filetype plugin on
 syntax on
-
-
-
 
 " completion settings
 set completeopt=menu,menuone,noselect
@@ -127,9 +123,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'norcalli/nvim-terminal.lua'
 
 call plug#end()
-
-set lazyredraw
-set termguicolors
 
 "vim surround customization
 let g:surround_{char2nr("d")} = "\n{/* \r */}\n"
