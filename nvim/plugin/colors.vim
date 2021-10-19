@@ -1,12 +1,12 @@
-set lazyredraw
-set termguicolors
-set background=dark
-
 " color theme settings
 let g:gruvbox_bold = 1
 let g:gruvbox_italic = 1
-let g:gruvbox_contrast_dark = "hard"
+"let g:gruvbox_contrast_dark = "hard"
 colorscheme gruvbox
+
+set lazyredraw
+set termguicolors
+set background=dark
 
 hi Normal ctermbg=NONE guibg=NONE
 " hi ColorColumn ctermbg=0 guibg=lightgrey " color for the 80 column glutter

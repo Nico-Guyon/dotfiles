@@ -1,6 +1,14 @@
 -- neovim-lsp configuration
 -- https://rishabhrd.github.io/jekyll/update/2020/09/19/nvim_lsp_config.html
 -- https://jose-elias-alvarez.medium.com/configuring-neovims-lsp-client-for-typescript-development-5789d58ea9c
+
+-- Enable loggin
+-- vim.lsp.set_log_level("debug")
+-- vim.cmd([[
+-- let g:lsp_log_verbose = 0
+-- let g:lsp_log_file = expand('~/lsp.log')
+-- ]])
+
 local nvim_lsp = require("lspconfig")
 
 local format_async = function(err, _, result, _, bufnr)
@@ -14,8 +22,6 @@ local format_async = function(err, _, result, _, bufnr)
         end
     end
 end
-
-vim.lsp.set_log_level("debug")
 
 vim.lsp.handlers["textDocument/formatting"] = format_async
 _G.lsp_organize_imports = function()
