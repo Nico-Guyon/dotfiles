@@ -225,35 +225,6 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 
 
-
-
-
-
-
-map <Leader> <Plug>(easymotion-prefix)
-
-if exists('g:vscode')
-    xmap gc  <Plug>VSCodeCommentary
-    nmap gc  <Plug>VSCodeCommentary
-    omap gc  <Plug>VSCodeCommentary
-    nmap gcc <Plug>VSCodeCommentaryLine
-
-    nnoremap <leader><leader> <Cmd>call VSCodeNotify('editor.debug.action.toggleBreakpoint')<CR>
-
-    nnoremap <leader>r <Cmd>call VSCodeNotify('workbench.action.debug.start')<CR>
-    nnoremap <leader>s <Cmd>call VSCodeNotify('workbench.action.debug.stop')<CR>
-    nnoremap <leader>c <Cmd>call VSCodeNotify('workbench.action.debug.continue')<CR>
-    nnoremap <leader>o <Cmd>call VSCodeNotify('workbench.action.debug.stepOver')<CR>
-    nnoremap <leader>i <Cmd>call VSCodeNotify('workbench.action.debug.stepInto')<CR>
-    nnoremap <leader>h <Cmd>call VSCodeNotify('editor.debug.action.showDebugHover ')<CR>
-
-    nnoremap <C-W>o <Cmd>call VSCodeNotify('workbench.action.closeEditorsInOtherGroups')<CR>
-
-endif
-
-
-
-
 let g:firenvim_config = { 
     \ 'globalSettings': {
         \ 'alt': 'all',
