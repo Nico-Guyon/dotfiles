@@ -272,61 +272,6 @@ if (empty($TMUX))
 endif
 
 
-" telescope configuration => using fzy-native
-" https://github.com/elianiva/dotfiles/blob/master/nvim/.config/nvim/lua/plugins/_telescope.lua#L58-L63
-lua << EOF
-local actions = require('telescope.actions')
-require('telescope').setup {
-    defaults = {
-        file_ignore_patterns = {'node_modules', '%.png', '%.ttf', '%.jpg'},
-        file_sorter = require('telescope.sorters').get_fzy_sorter,
-         vimgrep_arguments = {
-             'rg',
-             '--color=never',
-             '--no-heading',
-             '--with-filename',
-             '--line-number',
-             '--column',
-             '--smart-case'
-         },
-
-        prompt_prefix = ' >',
-        color_devicons = true,
-
-        file_previewer = require('telescope.previewers').vim_buffer_cat.new,
-        grep_previewer = require('telescope.previewers').vim_buffer_vimgrep.new,
-        qlist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
-
-        mappings = {
-            i = {
-                ["<C-x>"] = false,
-                ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
-                ["<C-l>"] = actions.send_to_loclist + actions.open_loclist,
-                ["<C-u>"] = actions.preview_scrolling_up,
-                ["<C-d>"] = actions.preview_scrolling_down,
-                ["<C-j>"] = actions.move_selection_next,
-                ["<C-k>"] = actions.move_selection_previous,
-            },
-            n = {
-                ["<C-u>"] = actions.preview_scrolling_up,
-                ["<C-d>"] = actions.preview_scrolling_down,
-                ["<C-j>"] = actions.move_selection_next,
-                ["<C-k>"] = actions.move_selection_previous,
-            }
-        }
-    },
-    extensions = {
-        fzy_native = {
-            override_generic_sorter = false,
-            override_file_sorter = true,
-        }
-    }
-}
-require('telescope').load_extension('fzy_native')
-
-EOF
-
-
 " neovim-lsp configuration
 " https://rishabhrd.github.io/jekyll/update/2020/09/19/nvim_lsp_config.html
 " https://jose-elias-alvarez.medium.com/configuring-neovims-lsp-client-for-typescript-development-5789d58ea9c
@@ -432,7 +377,7 @@ nnoremap <silent> ]e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_ne
 " lua vim.lsp.handlers["textDocument/publishDiagnostics"] = function() end
 
 
-
+" set log
 "let g:lsp_log_verbose = 1
 "let g:lsp_log_file = expand('~/lsp.log')
 
