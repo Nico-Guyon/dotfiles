@@ -1,4 +1,8 @@
 require'nvim-treesitter.configs'.setup {
+  -- enable better syntax highlighting by using treesitter
+  highlight = {
+    enable = true
+  },
   context_commentstring = {
     enable = true
   },

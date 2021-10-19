@@ -332,14 +332,6 @@ EOF
 " https://jose-elias-alvarez.medium.com/configuring-neovims-lsp-client-for-typescript-development-5789d58ea9c
 
 
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  highlight = {
-    enable = true
-  },
-}
-EOF
-
 " nvim-colorizer initialization
 " lua require'colorizer'.setup()
 
