@@ -179,12 +179,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'norcalli/nvim-colorizer.lua'
 
     " colorscheme plugins
-    " Plug 'rakr/vim-one'
-    " Plug 'gosukiwi/vim-atom-dark'
-    " Plug 'morhetz/gruvbox'
-    " Plug 'joshdick/onedark.vim'
-    " Plug 'ghifarit53/tokyonight-vim'
-    " Plug 'folke/tokyonight.nvim'
     Plug 'gruvbox-community/gruvbox'
 
 
@@ -196,10 +190,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'neoclide/vim-jsx-improve'
     Plug 'alvan/vim-closetag'
 
-    " airline
-    " Plug 'vim-airline/vim-airline'
-    " Plug 'vim-airline/vim-airline-themes'
-
     " miscs wiki + web browser integration
     Plug 'vimwiki/vimwiki'
     Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
@@ -208,7 +198,6 @@ call plug#begin('~/.vim/plugged')
     if exists('g:vscode')
         Plug 'Nico-Guyon/vim-vscode-easymotion'
     else
-        " Plug 'easymotion/vim-easymotion'
         Plug 'phaazon/hop.nvim'
     endif
 
@@ -239,19 +228,12 @@ call plug#end()
 
 
 
+" color theme settings
 set background=dark
-
 let g:gruvbox_bold = 1
 let g:gruvbox_italic = 1
 let g:gruvbox_contrast_dark = "hard"
-" let g:gruvbox_improved_warnings = 1
-" let g:gruvbox_improved_strings = 1
-
-" highlight Normal ctermbg=u
-" colorscheme one
 colorscheme gruvbox
-" colorscheme onedark
-
 highlight Normal ctermbg=NONE guibg=NONE
 
 
