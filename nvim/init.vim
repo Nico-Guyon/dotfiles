@@ -440,11 +440,6 @@ nnoremap <silent> ]e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_ne
 " lua vim.lsp.handlers["textDocument/publishDiagnostics"] = function() end
 
 
-" nvim-terminal.lua
-lua << EOF
-require'terminal'.setup()
-EOF
-
 
 "let g:lsp_log_verbose = 1
 "let g:lsp_log_file = expand('~/lsp.log')
