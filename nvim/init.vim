@@ -163,7 +163,8 @@ call plug#begin('~/.vim/plugged')
     " For vsnip user.
     Plug 'hrsh7th/cmp-vsnip'
     Plug 'hrsh7th/vim-vsnip'
-    Plug 'glepnir/lspsaga.nvim'
+    "Plug 'glepnir/lspsaga.nvim'
+    Plug 'tami5/lspsaga.nvim', { 'branch': 'nvim51' }
 
     " Git
     Plug 'tpope/vim-fugitive' 
