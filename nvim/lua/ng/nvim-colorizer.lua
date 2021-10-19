@@ -1,0 +1,2 @@
+-- nvim-colorizer initialization
+-- require("colorizer").setup()

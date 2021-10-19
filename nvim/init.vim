@@ -331,14 +331,6 @@ EOF
 " https://rishabhrd.github.io/jekyll/update/2020/09/19/nvim_lsp_config.html
 " https://jose-elias-alvarez.medium.com/configuring-neovims-lsp-client-for-typescript-development-5789d58ea9c
 
-
-" nvim-colorizer initialization
-" lua require'colorizer'.setup()
-
-" temporary disable lsp while easyMotion is enalbed / not working 
-autocmd User EasyMotionPromptBegin call lsp#disable()<CR>
-autocmd User EasyMotionPromptEnd call lsp#enable()<CR>
-
 set lazyredraw
 
 " enable airline tabline
