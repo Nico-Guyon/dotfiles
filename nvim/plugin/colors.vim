@@ -8,7 +8,7 @@ set lazyredraw
 set termguicolors
 set background=dark
 
-hi Normal ctermbg=NONE guibg=NONE
+"":hi Normal ctermbg=NONE guibg=NONE
 " hi ColorColumn ctermbg=0 guibg=lightgrey " color for the 80 column glutter
 
 " menu colors

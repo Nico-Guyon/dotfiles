@@ -51,6 +51,8 @@ nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>fq <cmd>Telescope quickfix<cr>
 nnoremap <leader>fl <cmd>Telescope loclist<cr>
+nnoremap <leader>fdw <cmd>Telescope lsp_workspace_diagnostics<cr>
+nnoremap <leader>fdd <cmd>Telescope lsp_document_diagnostics<cr>
 
 nnoremap <C-s> :w<CR>
 inoremap <C-s> <ESC>:w<CR>i
@@ -86,3 +88,25 @@ nnoremap <Leader>gt :A<CR>
 " reload nvim config
 nnoremap <leader>sv :source $MYVIMRC<CR>
 map <D-F> /
+
+
+" vim-fugitive toggle
+" https://www.reddit.com/r/vim/comments/njtmpy/help_toggle_fugitive_git_command_with_nnormap/
+" https://gist.github.com/actionshrimp/6493611
+function! ToggleGStatus()
+    if buflisted(bufname('.git/index'))
+        bd .git/index
+    else
+        Git
+    endif
+endfunction
+command ToggleGStatus :call ToggleGStatus()
+
+nmap <silent>gq :ToggleGStatus<CR>
+
+
+" Jump forward or backward
+imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
