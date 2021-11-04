@@ -51,6 +51,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'nvim-telescope/telescope.nvim'
     Plug 'nvim-telescope/telescope-fzy-native.nvim'
     Plug 'kyazdani42/nvim-web-devicons'
+    Plug 'nvim-telescope/telescope-hop.nvim'
 
     " LSP and completion
     Plug 'neovim/nvim-lspconfig'
