@@ -24,6 +24,7 @@ alias oldvim="vim"
 alias vs="nvim -S Session.vim"
 #  ls
 alias ll="exa -l -g --icons"
+alias l="exa -l -g --icons"
 alias lla="ll -alh"
 #  git
 alias gd="git diff"
@@ -71,5 +72,11 @@ alias cat="nvimpager"
 alias diff="v -d"
 alias sim="/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/Contents/MacOS/Simulator"
 
+alias yt="yarn test"
+alias ytt="yarn types"
+alias yw="yarn watch"
+alias yd="yarn dev"
+alias yr="yarn restart"
+alias ysr="yarn start_rewired"
 
 set -U FZF_ENABLE_OPEN_PREVIEW 1
