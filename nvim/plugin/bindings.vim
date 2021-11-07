@@ -13,6 +13,8 @@ imap jk <Esc>
 :command W w
 :command Q q
 
+" window navigation
+
 " map ctrl HJKL for movements between windows
 " faster than ctrl W then HJKL
 nnoremap <C-J> <C-W><C-J>
@@ -24,6 +26,11 @@ tnoremap <C-J> <C-\><C-n><C-W><C-J>
 tnoremap <C-K> <C-\><C-n><C-W><C-K>
 tnoremap <C-L> <C-\><C-n><C-W><C-L>
 tnoremap <C-H> <C-\><C-n><C-W><C-H>
+
+nnoremap <silent> <leader>1 :1wincmd w <cr>
+nnoremap <silent> <leader>2 :2wincmd w <cr>
+nnoremap <silent> <leader>3 :3wincmd w <cr>
+nnoremap <silent> <leader>4 :4wincmd w <cr>
 
 " mapping for quickly moving lines
 " <A-j> is character ∆
