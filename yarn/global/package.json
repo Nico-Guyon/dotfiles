@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "@nestjs/cli": "^7.5.5",
+    "diagnostic-languageserver": "^1.8.1",
+    "eslint_d": "^10.0.4",
+    "node-gyp": "^8.2.0",
+    "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
+    "tplant": "^2.3.6",
+    "typescript": "^4.2.4",
+    "typescript-language-server": "^0.5.1",
+    "vscode-langservers-extracted": "^2.4.0"
+  }
+}
