@@ -44,6 +44,8 @@ set updatetime=50
 set timeoutlen=1000
 set ttimeoutlen=5
 
+" list of nveovim plugins
+" https://github.com/rockerBOO/awesome-neovim
 call plug#begin('~/.vim/plugged')
     " Vim telescope
     Plug 'nvim-lua/popup.nvim'
@@ -124,6 +126,9 @@ call plug#begin('~/.vim/plugged')
 
     " terminal
     Plug 'norcalli/nvim-terminal.lua'
+
+    " github copilot
+    Plug 'github/copilot.vim'
 
 call plug#end()
 
