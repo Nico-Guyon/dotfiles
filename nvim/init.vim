@@ -130,7 +130,9 @@ call plug#begin('~/.vim/plugged')
     " github copilot
     Plug 'github/copilot.vim'
 
+    " sessions 
+    Plug 'Shatur/neovim-session-manager'
+
 call plug#end()
 
 lua require("ng")
-
