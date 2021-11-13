@@ -31,12 +31,12 @@ nnoremap <silent> <leader>1 :1wincmd w <cr>
 nnoremap <silent> <leader>2 :2wincmd w <cr>
 nnoremap <silent> <leader>3 :3wincmd w <cr>
 nnoremap <silent> <leader>4 :4wincmd w <cr>
-nnoremap <silent> <leader>5 :4wincmd w <cr>
-nnoremap <silent> <leader>6 :4wincmd w <cr>
-nnoremap <silent> <leader>7 :4wincmd w <cr>
-nnoremap <silent> <leader>8 :4wincmd w <cr>
-nnoremap <silent> <leader>9 :4wincmd w <cr>
-nnoremap <silent> <leader>0 :4wincmd w <cr>
+nnoremap <silent> <leader>5 :5wincmd w <cr>
+nnoremap <silent> <leader>6 :6wincmd w <cr>
+nnoremap <silent> <leader>7 :7wincmd w <cr>
+nnoremap <silent> <leader>8 :8wincmd w <cr>
+nnoremap <silent> <leader>9 :9wincmd w <cr>
+nnoremap <silent> <leader>0 :0wincmd w <cr>
 
 " mapping for quickly moving lines
 " <A-j> is character ∆
