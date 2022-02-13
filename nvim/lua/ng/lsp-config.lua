@@ -114,6 +114,19 @@ nvim_lsp.tsserver.setup {
     end
 }
 
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#jedi_language_server
+nvim_lsp.pyright.setup {
+    settings = {
+        python = {
+            analysis = {
+              autoSearchPaths = true,
+              diagnosticMode = "workspace",
+              useLibraryCodeForTypes = true
+            }
+        }
+    }
+}
+
 local filetypes = {
     typescript = "eslint",
     typescriptreact = "eslint",
