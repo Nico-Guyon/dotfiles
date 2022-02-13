@@ -33,6 +33,7 @@ alias gc="git commit -a"
 alias gb="git branch"
 # miscs
 alias ssh="kitty +kitten ssh"
+alias intel="arch -x86_64"
 
 # fish vim mode
 fish_vi_key_bindings
@@ -64,7 +65,7 @@ end
 set ANDROID_HOME $HOME/Library/Android/sdk/
 set PATH $PATH $ANDROID_HOME/tools
 set PATH $PATH $ANDROID_HOME/platform-tools
-set PATH /opt/homebrew/bin $PATH 
+set PATH /opt/homebrew/bin $PATH
 
 alias braw="/opt/homebrew/bin/brew"
 alias brow="arch -x86_64 /usr/local/Homebrew/bin/brew"
@@ -72,6 +73,7 @@ alias cat="nvimpager"
 alias diff="v -d"
 alias sim="/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/Contents/MacOS/Simulator"
 
+# aliases for yarn
 alias yt="yarn test"
 alias ytt="yarn types"
 alias yw="yarn watch"
@@ -79,4 +81,15 @@ alias yd="yarn dev"
 alias yr="yarn restart"
 alias ysr="yarn start_rewired"
 
+# django aliases
+alias pm="python manage.py"
+alias pes="pipenv shell"
+
 set -U FZF_ENABLE_OPEN_PREVIEW 1
+
+# python pyenv init
+set -x PYENV_ROOT $HOME/.pyenv
+set -x PATH $PYENV_ROOT/bin $PATH
+set -x PATH $PYENV_ROOT/shims $PATH
+status --is-interactive; and . (pyenv init - | psub)
+status --is-interactive; and . (pyenv virtualenv-init -|psub)
