@@ -3,7 +3,7 @@
 local actions = require('telescope.actions')
 require('telescope').setup {
     defaults = {
-        file_ignore_patterns = {'node_modules', '%.png', '%.ttf', '%.jpg'},
+        file_ignore_patterns = {'node_modules', '%.png', '%.ttf', '%.jpg', 'vendor', 'var'},
         file_sorter = require('telescope.sorters').get_fzy_sorter,
          vimgrep_arguments = {
              'rg',
