@@ -38,7 +38,19 @@ sources = {
   -- { name = 'ultisnips' },
 
   { name = 'buffer' },
-}
+
+  { name = 'copilot' }
+},
+formatting = {
+  format = function(entry, vim_item)
+
+    if entry.source.name == 'copilot' then
+      vim_item.kind = '[CO]'
+    end
+
+    return vim_item
+  end
+},
 })
 
 -- Setup lspconfig.
