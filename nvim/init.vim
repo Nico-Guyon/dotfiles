@@ -131,7 +131,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'github/copilot.vim'
 
     " sessions 
-    Plug 'Shatur/neovim-session-manager'
+    " Plug 'Shatur/neovim-session-manager'
 
 call plug#end()
 
