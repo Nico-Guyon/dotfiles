@@ -128,9 +128,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'norcalli/nvim-terminal.lua'
 
     " github copilot
-    " Plug 'github/copilot.vim'
-    Plug 'gelfand/copilot.vim'
-    Plug 'hrsh7th/cmp-copilot'
+    Plug 'github/copilot.vim'
+    " Plug 'gelfand/copilot.vim'
+    " Plug 'hrsh7th/cmp-copilot'
 
     " sessions 
     " Plug 'Shatur/neovim-session-manager'
