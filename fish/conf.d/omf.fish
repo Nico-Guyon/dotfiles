@@ -85,6 +85,10 @@ alias ysr="yarn start_rewired"
 alias pm="python manage.py"
 alias pes="pipenv shell"
 
+# tmux aliases
+alias tls="tmux ls"
+alias ta="tmux attach-session -t "
+
 set -U FZF_ENABLE_OPEN_PREVIEW 1
 
 # python pyenv init
@@ -93,3 +97,4 @@ set -x PATH $PYENV_ROOT/bin $PATH
 set -x PATH $PYENV_ROOT/shims $PATH
 status --is-interactive; and . (pyenv init - | psub)
 status --is-interactive; and . (pyenv virtualenv-init -|psub)
+
