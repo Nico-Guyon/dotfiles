@@ -1,5 +1,8 @@
 require'nvim-treesitter.configs'.setup {
   -- enable better syntax highlighting by using treesitter
+  indent = {
+      enable = true
+  },
   highlight = {
     enable = true
   },
