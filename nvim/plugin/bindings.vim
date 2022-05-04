@@ -38,6 +38,9 @@ nnoremap <silent> <leader>8 :8wincmd w <cr>
 nnoremap <silent> <leader>9 :9wincmd w <cr>
 nnoremap <silent> <leader>0 :0wincmd w <cr>
 
+nnoremap <silent> <C-W>b <C-W>v<C-W>v<C-W>v
+nnoremap <silent> <C-W><C-b> <C-W>v<C-W>v<C-W>v
+
 " mapping for quickly moving lines
 " <A-j> is character ∆
 " <A-k> is character ˚
@@ -68,7 +71,7 @@ nnoremap <leader>fdw <cmd>Telescope lsp_workspace_diagnostics<cr>
 nnoremap <leader>fdd <cmd>Telescope lsp_document_diagnostics<cr>
 
 nnoremap <C-s> :w<CR>
-inoremap <C-s> <ESC>:w<CR>i
+inoremap <C-s> <ESC>:w<CR>
 
 " Colorizer toggle mapping
 nnoremap <leader>ct <cmd>ColorizerToggle<cr>
