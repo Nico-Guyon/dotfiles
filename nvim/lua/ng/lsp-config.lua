@@ -5,25 +5,25 @@
 -- Enable loggin
 -- vim.lsp.set_log_level("debug")
 -- vim.cmd([[
--- let g:lsp_log_verbose = 0
+-- let g:lsp_log_verbose = 1
 -- let g:lsp_log_file = expand('~/lsp.log')
 -- ]])
 
 local nvim_lsp = require("lspconfig")
 
-local format_async = function(err, _, result, _, bufnr)
-    if err ~= nil or result == nil then return end
-    if not vim.api.nvim_buf_get_option(bufnr, "modified") then
-        local view = vim.fn.winsaveview()
-        vim.lsp.util.apply_text_edits(result, bufnr)
-        vim.fn.winrestview(view)
-        if bufnr == vim.api.nvim_get_current_buf() then
-            vim.api.nvim_command("noautocmd :update")
-        end
-    end
-end
+-- local format_async = function(err, _, result, _, bufnr)
+    -- if err ~= nil or result == nil then return end
+    -- if not vim.api.nvim_buf_get_option(bufnr, "modified") then
+    --     local view = vim.fn.winsaveview()
+    --     vim.lsp.util.apply_text_edits(result, bufnr)
+    --     vim.fn.winrestview(view)
+    --     if bufnr == vim.api.nvim_get_current_buf() then
+    --         vim.api.nvim_command("noautocmd :update")
+    --     end
+    -- end
+-- end
 
-vim.lsp.handlers["textDocument/formatting"] = format_async
+-- vim.lsp.handlers["textDocument/formatting"] = format_async
 _G.lsp_organize_imports = function()
     local params = {
         command = "_typescript.organizeImports",
@@ -66,6 +66,9 @@ end
 
 -- https://rishabhrd.github.io/jekyll/update/2020/09/19/nvim_lsp_config.html
 local on_attach = function(client, bufnr)
+    -- TODO on_attach is called twice with bufnr being nil the first time
+    if(bufnr == nil) then return end
+
     local buf_map = vim.api.nvim_buf_set_keymap
     vim.cmd("command! LspDef lua vim.lsp.buf.definition()")
     vim.cmd("command! LspFormatting lua vim.lsp.buf.formatting()")
@@ -96,6 +99,7 @@ local on_attach = function(client, bufnr)
               {silent = true})
 
 
+    -- https://blog.fsouza.dev/prettierd-neovim-format-on-save/
     if client.resolved_capabilities.document_formatting then
         vim.api.nvim_exec([[
          augroup LspAutocommands
@@ -108,7 +112,6 @@ end
 
 nvim_lsp.tsserver.setup {
     on_attach = function(client)
-        --client.resolved_capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
         client.resolved_capabilities.document_formatting = false
         on_attach(client)
     end
@@ -116,12 +119,18 @@ nvim_lsp.tsserver.setup {
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#jedi_language_server
 nvim_lsp.pyright.setup {
+    on_attach = function(client)
+        client.resolved_capabilities.document_formatting = false
+        on_attach(client)
+    end,
     settings = {
         python = {
             analysis = {
               autoSearchPaths = true,
               diagnosticMode = "workspace",
-              useLibraryCodeForTypes = true
+              useLibraryCodeForTypes = true,
+              logLevel = "Error",
+              typeCheckingMode = "strict"
             }
         }
     }
@@ -131,9 +140,12 @@ local filetypes = {
     typescript = "eslint",
     typescriptreact = "eslint",
     html = "eslint",
+    python = 'flake8'
 }
 
+
 local linters = {
+    -- https://github.com/creativenull/diagnosticls-configs-nvim/blob/main/lua/diagnosticls-configs/linters/eslint_d.lua
     eslint = {
         sourceName = "eslint",
         command = "eslint_d",
@@ -150,18 +162,52 @@ local linters = {
             security = "severity"
         },
         securities = {[2] = "error", [1] = "warning"}
+    },
+    flake8 = {
+        sourceName = 'flake8',
+        command = 'flake8',
+        rootPatterns = {".flake8"},
+        args = { '--config=/Volumes/COR/pasa/master/.flake8', '--stdin-display-name', "%filepath", [[--format=%(row)d,%(col)d,%(code).1s,%(code)s: %(text)s]], '-' },
+        deboune = 100,
+        debounce = 100,
+        offsetLine = 0,
+        offsetColumn = 0,
+        formatLines = 1,
+        formatPattern = {
+          [[(\d+),(\d+),([A-Z]),(.*)(\r|\n)*$]],
+          { line = 1, column = 2, security = 3, message = { '[flake8] ', 4 } },
+        },
+        securities = {
+          W = 'warning',
+          E = 'error',
+          F = 'error',
+          C = 'error',
+          N = 'error',
+        },
     }
 }
 
 local formatters = {
-    prettier = {command = "eslint_d", args = {"--fix-to-stdout", "--stdin", "--stdin-filename", "%filepath"}},
-    prettierSimple = {command = "prettier", asrgs = {"--stdin-filepath", '%filepath'}}
+    -- https://github.com/creativenull/diagnosticls-configs-nvim/blob/main/lua/diagnosticls-configs/formatters/eslint_d_fmt.lua
+    prettier = {
+        command = "eslint_d",
+        args = {"--fix-to-stdout", "--stdin", "--stdin-filename", "%filepath"},
+        rootPatterns = {".eslintrc.js", "package.json"},
+    },
+    prettierSimple = {command = "prettier", args = {"--stdin-filepath", '%filepath'}},
+    -- https://github.com/creativenull/diagnosticls-configs-nvim/blob/main/lua/diagnosticls-configs/formatters/black.lua
+    black = {
+        command = "black",
+        args = {'-', '--quiet', '--line-length', '79', '--stdin-filename', '%filepath'},
+        rootPatterns = {"pyproject.toml"},
+    }
 }
 
 local formatFiletypes = {
     typescript = "prettier",
     typescriptreact = "prettier",
-    html = "prettierSimple"
+    html = "prettierSimple",
+    python = 'black'
 }
 
 -- https://www.reddit.com/r/neovim/comments/j2tn38/help_with_integrate_nvimlsp_with_eslint/
