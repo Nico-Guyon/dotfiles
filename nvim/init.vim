@@ -1,6 +1,10 @@
 set title
 set titlestring=\ %-25.55F\ %a%r%m titlelen=70
-set clipboard=unnamedplus
+" set clipboard=unnamedplus
+
+let g:clipboard = {'copy': {'+': 'pbcopy', '*': 'pbcopy'}, 'paste': {'+': 'pbpaste', '*': 'pbpaste'}, 'name': 'pbcopy', 'cache_enabled': 0}
+
+set clipboard+=unnamedplus
 
 set nocompatible
 filetype plugin on
@@ -44,6 +48,24 @@ set updatetime=50
 set timeoutlen=1000
 set ttimeoutlen=5
 
+" https://vi.stackexchange.com/questions/5128/matchpairs-makes-vim-slow
+let g:matchparen_timeout = 20
+let g:matchparen_insert_timeout = 20
+
+" reload neovim configuration (don't work for now ...)
+if (!exists('*SourceConfig'))
+  function SourceConfig() abort
+    " Your path will probably be different
+    for f in split(glob('~/.config/nvim/autoload/*'), '\n')
+      exe 'source' f
+    endfor
+
+    source $MYVIMRC
+  endfunction
+endif
+
+nnoremap <silent> <Leader>r :call SourceConfig()<cr>
+
 " list of nveovim plugins
 " https://github.com/rockerBOO/awesome-neovim
 call plug#begin('~/.vim/plugged')
@@ -61,11 +83,15 @@ call plug#begin('~/.vim/plugged')
     Plug 'hrsh7th/cmp-buffer'
     Plug 'hrsh7th/nvim-cmp'
 
+    " LSP UI
+    " Previsous versions of lspsaga no more maintained anymore
+    " Plug 'glepnir/lspsaga.nvim'
+    " Plug 'tami5/lspsaga.nvim', { 'branch': 'nvim51' }
+    Plug 'tami5/lspsaga.nvim'
+
     " For vsnip user.
-    Plug 'hrsh7th/cmp-vsnip'
-    Plug 'hrsh7th/vim-vsnip'
-    "Plug 'glepnir/lspsaga.nvim'
-    Plug 'tami5/lspsaga.nvim', { 'branch': 'nvim51' }
+     Plug 'hrsh7th/cmp-vsnip'
+     Plug 'hrsh7th/vim-vsnip'
 
     " Git
     Plug 'tpope/vim-fugitive' 
@@ -75,14 +101,13 @@ call plug#begin('~/.vim/plugged')
 
     " syntax highligh
     " disabled because now using treesitter for highlighting
-    Plug 'sheerun/vim-polyglot'
+    " Plug 'sheerun/vim-polyglot'
 
     " hex color code colorizer
     Plug 'norcalli/nvim-colorizer.lua'
 
     " colorscheme plugins
     Plug 'gruvbox-community/gruvbox'
-
 
     " text manipulation plugins
     Plug 'tpope/vim-commentary'
@@ -122,17 +147,22 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-unimpaired'
     
     " better matchit plugin for % key
-    Plug 'andymass/vim-matchup'
+    " disabled because was taking too much resources
+    " Plug 'andymass/vim-matchup'
 
     " terminal
     Plug 'norcalli/nvim-terminal.lua'
 
     " github copilot
     Plug 'github/copilot.vim'
-    " Plug 'gelfand/copilot.vim'
+    " Alternatives versions of copilot => no more used because mainstream
+    " copilot now has features that were missing
     " Plug 'hrsh7th/cmp-copilot'
+    " alternative github version with next / prev suggestions
+    " Plug 'gelfand/copilot.vim'
 
     " sessions 
+    " no more used => was causing too much problems
     " Plug 'Shatur/neovim-session-manager'
 
 call plug#end()
