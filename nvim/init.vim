@@ -1,3 +1,5 @@
+set shell=/bin/bash
+
 set title
 set titlestring=\ %-25.55F\ %a%r%m titlelen=70
 " set clipboard=unnamedplus
@@ -49,8 +51,8 @@ set timeoutlen=1000
 set ttimeoutlen=5
 
 " https://vi.stackexchange.com/questions/5128/matchpairs-makes-vim-slow
-let g:matchparen_timeout = 20
-let g:matchparen_insert_timeout = 20
+let g:matchparen_timeout = 2
+let g:matchparen_insert_timeout = 2
 
 " reload neovim configuration (don't work for now ...)
 if (!exists('*SourceConfig'))
@@ -154,7 +156,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'norcalli/nvim-terminal.lua'
 
     " github copilot
-    Plug 'github/copilot.vim'
+    " Plug 'github/copilot.vim'
     " Alternatives versions of copilot => no more used because mainstream
     " copilot now has features that were missing
     " Plug 'hrsh7th/cmp-copilot'
