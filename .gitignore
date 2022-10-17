@@ -4,6 +4,7 @@ iterm2
 configstore
 filezilla
 wireshark
+karabiner/automatic_backups/*.json
 
 yarn/link
 
