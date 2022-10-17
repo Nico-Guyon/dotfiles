@@ -1,5 +1,5 @@
 {
-  "androidHome": "/opt/android_sdk",
+  "androidHome": "/Users/nico/Library/Android/sdk",
   "enableAndroid": true,
   "enableIOS": true,
   "enablePhysicalIOS": true,
