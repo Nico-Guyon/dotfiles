@@ -100,11 +100,11 @@ local on_attach = function(client, bufnr)
 
 
     -- https://blog.fsouza.dev/prettierd-neovim-format-on-save/
-    if client.resolved_capabilities.document_formatting then
+    if client.server_capabilities.documentFormattingProvider then
         vim.api.nvim_exec([[
          augroup LspAutocommands
              autocmd! * <buffer>
-             autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()  
+             autocmd BufWritePre <buffer> lua vim.lsp.buf.format()  
          augroup END
          ]], true)
     end
@@ -112,22 +112,35 @@ end
 
 nvim_lsp.tsserver.setup {
     on_attach = function(client)
-        client.resolved_capabilities.document_formatting = false
+        client.server_capabilities.documentFormattingProvider = false
         on_attach(client)
     end
 }
 
+local util = require("lspconfig/util")
+
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#jedi_language_server
 nvim_lsp.pyright.setup {
     on_attach = function(client)
-        client.resolved_capabilities.document_formatting = false
+        client.server_capabilities.documentFormattingProvider = false
         on_attach(client)
     end,
+    -- pyright needs to determine root_dir if not when jumping to venv for library
+    -- it will scan the entire drive while searching for a .git file
+    root_dir = function(fname)
+        return util.root_pattern(".git", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt")(fname) or
+          util.path.dirname(fname)
+    end,
+    -- debounce text to limit number of pyright-langserver calls if needed one day
+    -- https://www.reddit.com/r/neovim/comments/px66bx/high_cpu_usage_by_node_vimlsp/
+    -- flags = {
+    --     debounce_text_changes = 10000
+    -- },
     settings = {
         python = {
             analysis = {
               autoSearchPaths = true,
-              diagnosticMode = "workspace",
+              diagnosticMode = "openFilesOnly",
               useLibraryCodeForTypes = true,
               logLevel = "Error",
               typeCheckingMode = "strict"
@@ -167,7 +180,7 @@ local linters = {
         sourceName = 'flake8',
         command = 'flake8',
         rootPatterns = {".flake8"},
-        args = { '--config=/Volumes/COR/pasa/master/.flake8', '--stdin-display-name', "%filepath", [[--format=%(row)d,%(col)d,%(code).1s,%(code)s: %(text)s]], '-' },
+        args = { '--stdin-display-name', "%filepath", [[--format=%(row)d,%(col)d,%(code).1s,%(code)s: %(text)s]], '-' },
         deboune = 100,
         debounce = 100,
         offsetLine = 0,
