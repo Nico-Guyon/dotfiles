@@ -32,13 +32,16 @@ alias gs="git status"
 alias gc="git commit -a"
 alias gb="git branch"
 # miscs
-alias ssh="kitty +kitten ssh"
+# alias ssh="kitty +kitten ssh"
 alias intel="arch -x86_64"
 
 # fish vim mode
 fish_vi_key_bindings
 fish_vi_cursor
 set fish_key_bindings fish_user_key_bindings
+
+# fish ssh agent
+fish_ssh_agent
 
 # UTF-8 support
 export LC_ALL=en_US.UTF-8
