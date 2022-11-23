@@ -9,6 +9,8 @@ local general_on_attach = function(client, bufnr)
   -- if client.resolved_capabilities.completion then
   --   lsp_completion.on_attach(client, bufnr)
   -- end
+    -- disable default formatting because we're actually using prettier for this
+    client.server_capabilities.documentFormattingProvider = false
 end
 
 -- Setup basic lsp servers
