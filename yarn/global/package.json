@@ -2,6 +2,8 @@
   "dependencies": {
     "@nestjs/cli": "^7.5.5",
     "appium": "^1.22.3",
+    "appium-doctor": "^1.16.2",
+    "create-react-app": "^5.0.1",
     "diagnostic-languageserver": "^1.8.1",
     "eslint_d": "^11.0.0",
     "http-server": "^14.1.0",
