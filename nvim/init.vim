@@ -119,6 +119,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'neoclide/vim-jsx-improve'
     Plug 'alvan/vim-closetag'
 
+    " multi-cursors
+    Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+
     " . repeat command for plugins
     Plug 'tpope/vim-repeat'
 
