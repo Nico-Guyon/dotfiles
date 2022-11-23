@@ -81,8 +81,7 @@ local on_attach = function(client, bufnr)
     vim.cmd("command! LspImplementation lua vim.lsp.buf.implementation()")
     vim.cmd("command! LspDiagPrev lua vim.lsp.diagnostic.goto_prev()")
     vim.cmd("command! LspDiagNext lua vim.lsp.diagnostic.goto_next()")
-    vim.cmd(
-        "command! LspDiagLine lua vim.lsp.diagnostic.show_line_diagnostics()")
+    vim.cmd( "command! LspDiagLine lua vim.lsp.diagnostic.show_line_diagnostics()")
     vim.cmd("command! LspSignatureHelp lua vim.lsp.buf.signature_help()")
 
     buf_map(bufnr, "n", "gd", ":LspDef<CR>", {silent = true})
@@ -200,6 +199,7 @@ local linters = {
     }
 }
 
+-- TODO try to switch to prettierd for speeding up formatting
 local formatters = {
     -- https://github.com/creativenull/diagnosticls-configs-nvim/blob/main/lua/diagnosticls-configs/formatters/eslint_d_fmt.lua
     prettier = {
@@ -207,7 +207,11 @@ local formatters = {
         args = {"--fix-to-stdout", "--stdin", "--stdin-filename", "%filepath"},
         rootPatterns = {".eslintrc.js", "package.json"},
     },
-    prettierSimple = {command = "prettier", args = {"--stdin-filepath", '%filepath'}},
+    prettierSimple = {
+        command = "prettier",
+        args = {"--stdin-filepath", '%filepath'},
+        rootPatterns = {".eslintrc.js", "package.json"},
+    },
     -- https://github.com/creativenull/diagnosticls-configs-nvim/blob/main/lua/diagnosticls-configs/formatters/black.lua
     black = {
         command = "black",
